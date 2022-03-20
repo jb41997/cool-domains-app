@@ -1,11 +1,31 @@
 /* Code found on https://loading.io/css/ */
-.lds-ring {
+.lds-ring{
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.7);
+  
+  display:flex;
+  justify-self: center;
+  align-items: center;
+}
+
+.lds-inner{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  margin:0 auto;
+}
+/* .lds-ring {
   display: inline-block;
   position: relative;
   width: 80px;
   height: 80px;
-}
-.lds-ring div {
+} */
+.lds-inner div {
   box-sizing: border-box;
   display: block;
   position: absolute;
@@ -15,13 +35,14 @@
   border: 8px solid #fff;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #fff transparent transparent transparent;
+  border-color: #55f002 transparent transparent;
 }
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;
 }
 .lds-ring div:nth-child(2) {
   animation-delay: -0.3s;
+  
 }
 .lds-ring div:nth-child(3) {
   animation-delay: -0.15s;

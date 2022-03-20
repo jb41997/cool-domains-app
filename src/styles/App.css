@@ -1,6 +1,7 @@
 .App {
   height: 100vh;
-  background-color: #0d1116;
+  background-color: #000;
+  background: -webkit-linear-gradient(right,#77c9d4, #57bc90);
   text-align: center;
   color: white;
 }
@@ -11,8 +12,9 @@ p {
 
 .container {
   height: 100%;
-  background-color: #181818;
   display: flex;
+  max-width:1200px;
+  margin:0 auto;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -41,7 +43,7 @@ header{
 }
 
 .left{
-  text-align: left;
+  text-align: center;
   margin-left: 10%;
 }
 
@@ -53,7 +55,11 @@ header{
 
 .right{
   display: flex;
+  color: #015249;
   background: black;
+  background-color: #fef9ff;
+  background-size: 110% 110%;
+  animation: gradient-animation 4s ease infinite;
   border-radius: 16px;
   padding: 12px 20px;
   height: 99%;
@@ -75,7 +81,7 @@ header{
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
-  color: white;
+  color: #015249;
 }
 
 .connect-wallet-container {
@@ -104,13 +110,22 @@ header{
 }
 
 .mint-button {
-  background: -webkit-linear-gradient(left, #a200d6, #ff6fdf);
-  font-size: 18px;
-  background-size: 200% 200%;
+  background-color: #fff07c;
+  background: -webkit-radial-gradient(center,#fef9ff,#f5d800);
+  background-size: 150% 150%;
   animation: gradient-animation 4s ease infinite;
+  font-size: 18px;
   margin: 20px 10px;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 0px 2rem;
+  cursor: pointer;
+  transition:ease-in .3s;
+}
+
+.mint-button:hover,
+.mint-button:focus{
+  transform: scale(1.1);
+  box-shadow: 0 0 2px 0 rgba(0,0,0,0.3), 0 0 15px 0 rgba(245,216,0,0.9), 0 0 30px 5px rgba(245,216,0,0.3);
 }
 
 .mint-button:disabled{
@@ -169,8 +184,8 @@ header{
 input{
   border: 0;
   border-radius: 12px;
-  background-color: black;
-  color: white;
+  background-color: #FEF9FF;
+  color: #015249;
   letter-spacing: 1px;
   font-size: 26px;
   width: 400px;
@@ -180,7 +195,7 @@ input{
 }
 
 input::placeholder {
-  color: gray;
+  color: #a5a5af;
   letter-spacing: 2px;
 }
 
@@ -202,12 +217,16 @@ input:focus {
   position: absolute;
   font-size: 20px;
   font-weight: bold;
-  color: white;
+  color: #015249;
   /* left: -70px; */
   right: 22px;
   margin: 0;  
   padding: 0;
   margin-bottom: 13px;
+}
+
+hr {
+  width:100%;
 }
 
 .mint-list {
@@ -228,28 +247,39 @@ input:focus {
   border-radius: 5px;
   margin: 10px 15px;
   font-size: 18px;
-  background-color: #c4b7fa;
-  color: black;
+  background-color: #fef9ff;
+  border:1px solid #fa824c;
+  color: #015249;
   min-width: 150px;
   max-width: fit-content;
   box-shadow: 0px 0px 10px 3px rgba(255, 255, 255, 0.2);
+  transition:ease-in .2s;
 }
 
+.mint-item:hover,
+.mint-itim:focus {
+  transform:scale(1.03)
+}
 /* Different background-colour for every nth mint-item */
-.mint-item:nth-child(2n) {
-  background-color: lightblue;
+.mint-item:nth-child(2n){
+  border-color: #6f73d2;
 }
 
 .mint-item:nth-child(3n) {
-  background-color: lightpink;
+  border-color: #bda0bc;
 }
 
-.mint-item:nth-child(5n) {
-  background-color: lightgreen;
-}
+/* .mint-item:nth-child(5n) {
+  background-color: #2D9A4D;
+} */
 
 .link{
-  color: black;
+  color: #8549ea;
+  text-decoration: none;
+}
+
+.pop-link{
+  color: #f5d800;
   text-decoration: none;
 }
 

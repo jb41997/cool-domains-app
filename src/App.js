@@ -247,7 +247,7 @@ const App = () => {
 	// Create a function to render if wallet is not connected yet
 	const renderNotConnectedContainer = () => (
 		<div className="connect-wallet-container">
-			<img src="https://media.giphy.com/media/1iTItUOuJLsbev28/giphy.gif" alt="Pibble gif" />
+			<img src="https://media.giphy.com/media/Gbang80Og8iE5gJWkW/giphy-downsized-large.gif" alt="Pibble gif" />
 			<button onClick={connectWallet} className="cta-button connect-wallet-button">
 				Connect Wallet
 			</button>

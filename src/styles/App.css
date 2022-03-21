@@ -4,12 +4,16 @@
   background: -webkit-linear-gradient(right,#77c9d4, #57bc90);
   text-align: center;
   color: white;
+  font-family: 'Gluten', cursive, sans-serif;
 }
 
 p {
   margin:0;
 }
 
+h1 a{
+  font-weight:lighter;
+}
 .container {
   height: 100%;
   display: flex;
@@ -67,6 +71,22 @@ header{
   margin-top: 10px;
 }
 
+@media (max-width:1200px) {
+  .App{
+    height:100%;
+  }
+  header {
+    flex-direction: column;
+    align-items:center;
+  }
+  .right{
+    margin:0 0 3rem 0;
+  }
+  .left{
+    margin: 0 0 1rem 0;
+  }
+}
+
 .content-container {
   background-color: #a200d6;
 }
@@ -92,21 +112,29 @@ header{
 }
 
 .connect-wallet-container img {
+  border-radius: 20px;
   padding-bottom: 20px;
 }
 
 .connect-wallet-button {
   background-image: linear-gradient(
     to right,
-    #ff8177 0%,
-    #ff867a 0%,
-    #ff8c7f 21%,
-    #f99185 52%,
-    #cf556c 78%,
-    #b12a5b 100%
+    #ffe20a 0%,
+    #ffe20a 0%,
+    #ffe51f 21%,
+    #ffe51f 52%,
+    #f5d800 78%,
+    #b8a200 100%
   );
   background-size: 200% 200%;
   animation: gradient-animation 4s ease infinite;
+  cursor: pointer;
+  transition:ease-in .3s;
+}
+
+.connect-wallet-button:hover,
+.connect-wallet-button:focus{
+  transform: scale(1.05);
 }
 
 .mint-button {
@@ -120,6 +148,7 @@ header{
   padding: 0px 2rem;
   cursor: pointer;
   transition:ease-in .3s;
+  font-family: 'Gluten', cursive, sans-serif;
 }
 
 .mint-button:hover,
@@ -279,7 +308,7 @@ hr {
 }
 
 .pop-link{
-  color: #f5d800;
+  color: #38023b;
   text-decoration: none;
 }
 

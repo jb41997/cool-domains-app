@@ -141,37 +141,36 @@ const App = () => {
         setLoading(true);
       	const { ethereum } = window;
       	if (ethereum) {
-  			const provider = new ethers.providers.Web3Provider(ethereum);
-  			const signer = provider.getSigner();
-  			const contract = new ethers.Contract(CONTRACT_ADDRESS, contractAbi.abi, signer);
+			const provider = new ethers.providers.Web3Provider(ethereum);
+			const signer = provider.getSigner();
+			const contract = new ethers.Contract(CONTRACT_ADDRESS, contractAbi.abi, signer);
+
+			console.log("Going to pop wallet now to pay gas...")
+			let tx = await contract.register(domain, {value: ethers.utils.parseEther(price)});
+			// Wait for the transaction to be mined
+			const receipt = await tx.wait();
+
+			// Check if the transaction was successfully completed
+			if (receipt.status === 1) {
+				console.log("Domain minted! https://mumbai.polygonscan.com/tx/"+tx.hash);
+				setPopupCont(
+					<div>
+						<h1>Domain minted!&nbsp;&nbsp;<a className='pop-link' href={`https://mumbai.polygonscan.com/tx/${tx.hash}`} target='_blank' rel='noopener noreferrer'>(view transaction)</a></h1>
+						<h3>Be sure to approve the next transaction in Metamask to set your dogs super power!</h3>
+					</div>)
+				setPopup(true)
+				// Set the record for the domain
+				tx = await contract.setRecord(domain, record);
+				await tx.wait();
   
-  			console.log("Going to pop wallet now to pay gas...")
-        		let tx = await contract.register(domain, {value: ethers.utils.parseEther(price)});
-        		// Wait for the transaction to be mined
-  			const receipt = await tx.wait();
-  
-  			// Check if the transaction was successfully completed
-  			if (receipt.status === 1) {
-  				console.log("Domain minted! https://mumbai.polygonscan.com/tx/"+tx.hash);
-          setPopupCont(
-            <div>
-              <h1>Domain minted!</h1>
-              <a className='pop-link' href={`https://mumbai.polygonscan.com/tx/${tx.hash}`} target='_blank' rel='noopener noreferrer'>Transaction on polygonscan.com</a>
-            </div>)
-          setPopup(true)
-  				setLoading(false);
-  				// Set the record for the domain
-  				tx = await contract.setRecord(domain, record);
-  				await tx.wait();
-  
-  				console.log("Record set! https://mumbai.polygonscan.com/tx/"+tx.hash);
-          setPopupCont(
-            <div>
-              <h1>Record set!</h1>
-              <a className='pop-link' href={`https://mumbai.polygonscan.com/tx/${tx.hash}`} target='_blank' rel='noopener noreferrer'>Transaction on polygonscan.com</a>
-            </div>)
-          setPopup(true)
-  				
+				console.log("Record set! https://mumbai.polygonscan.com/tx/"+tx.hash);
+				setPopupCont(
+					<div>
+						<h1>Record set!&nbsp;&nbsp;<a className='pop-link' href={`https://mumbai.polygonscan.com/tx/${tx.hash}`} target='_blank' rel='noopener noreferrer'>(view transaction)</a></h1>
+						<h3>Congrats! Feel free to mint another!</h3>
+					</div>)
+				setPopup(true)
+				setLoading(false);
   				// Call fetchMints after 2 seconds
   				setTimeout(() => {
   					fetchMints();
@@ -248,7 +247,7 @@ const App = () => {
 	// Create a function to render if wallet is not connected yet
 	const renderNotConnectedContainer = () => (
 		<div className="connect-wallet-container">
-			<img src="https://media.giphy.com/media/Gbang80Og8iE5gJWkW/giphy-downsized-large.gif" alt="Pibble gif" />
+			<img src="https://media.giphy.com/media/1iTItUOuJLsbev28/giphy.gif" alt="Pibble gif" />
 			<button onClick={connectWallet} className="cta-button connect-wallet-button">
 				Connect Wallet
 			</button>
@@ -319,21 +318,22 @@ const App = () => {
   					{ mints.map((mint, index) => {
   						return (
   							<div className="mint-item" key={index}>
-  								<div className='mint-row'>🐶
+  								<div className='mint-row'>🐶&nbsp; 
   									<a className="link" href={`https://testnets.opensea.io/assets/mumbai/${CONTRACT_ADDRESS}/${mint.id}`} target="_blank" rel="noopener noreferrer">
   										<p className="underlined">{' '}{mint.name}{tld}{' '}</p>
-  									</a>
-  									{/* If mint.owner is currentAccount, add an "edit" button*/}
-  									{ mint.owner.toLowerCase() === currentAccount.toLowerCase() ?
-  										<button className="edit-button" onClick={() => editRecord(mint.name)}>
-  											<img className="edit-icon" src="https://img.icons8.com/metro/26/000000/pencil.png" alt="Edit button" />
-  										</button>
-  										:
-  										null
-  									}
+  									</a>&nbsp;🐶
   								</div>
 								<hr/>
-  					<p> {mint.record} </p>
+  					<p> {mint.record}
+						{/* If mint.owner is currentAccount, add an "edit" button*/}
+						{ mint.owner.toLowerCase() === currentAccount.toLowerCase() ?
+							<button className="edit-button" onClick={() => editRecord(mint.name)}>
+								<img className="edit-icon" src="https://img.icons8.com/metro/26/000000/pencil.png" alt="Edit button" />
+							</button>
+							:
+							null
+						} 
+					</p>
   				</div>)
   				})}
   			</div>
@@ -364,7 +364,7 @@ const App = () => {
 				<div className="header-container">
 					<header>
 						<div className="left">
-							<p className="title">🐶 Pibble Name Service 🐶</p>
+							<p className="title">🐶 Pibble (Pitbull) Name Service 🐶</p>
 							<p className="subtitle">Your doggiest API on the blockchain!</p>
 						</div>
 						{/* Display a logo and wallet connection status*/}
